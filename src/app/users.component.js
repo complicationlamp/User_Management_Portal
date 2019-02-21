@@ -16,6 +16,7 @@ var UsersComponent = (function () {
         this.router = router;
         this.userService = userService;
     }
+    // =====================BASIC CRUD below this line ===========================
     UsersComponent.prototype.getUsers = function () {
         var _this = this;
         this.userService.getUsers().then(function (users) { return _this.users = users; });

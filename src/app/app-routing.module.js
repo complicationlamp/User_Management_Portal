@@ -9,6 +9,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var users_component_1 = require("./users.component");
 var user_detail_component_1 = require("./user-detail.component");
+// only need one page so just rerouting to the users, leaves the ability to break out later
 var routes = [
     { path: '', redirectTo: '/users', pathMatch: 'full' },
     { path: 'detail/:id', component: user_detail_component_1.UserDetailComponent },

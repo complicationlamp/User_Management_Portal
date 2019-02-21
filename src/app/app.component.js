@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
+// broken out section for the title and how to use section of the application
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'User Management Portal';

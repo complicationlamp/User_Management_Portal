@@ -19,17 +19,20 @@ var UserDetailComponent = (function () {
         this.route = route;
         this.location = location;
     }
+    // the error on line 27 must be commented out for the app to start, uncomment it to se detail page
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
-            .switchMap(function (params) { return _this.userService.getUser(+params['id']); })
-            .subscribe(function (user) { return _this.user = user; });
+            .switchMap(function (params) { return _this.userService.getUser(+params['id']); });
+        // .subscribe(user => this.user = user);
     };
+    // save also runs into a problem during the atempted fix, need to look at how user object is being passed
     UserDetailComponent.prototype.save = function () {
         var _this = this;
         this.userService.update(this.user)
             .then(function () { return _this.goBack(); });
     };
+    // function to go back, requiers the location property to nav back to previous page
     UserDetailComponent.prototype.goBack = function () {
         this.location.back();
     };

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+
+// broken out section for the title and how to use section of the application
 @Component({
   selector: 'my-app',
   template: `

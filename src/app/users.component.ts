@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
     private router: Router,
     private userService: UserService) { }
 
+    // =====================BASIC CRUD below this line ===========================
   getUsers(): void {
     this.userService.getUsers().then(users => this.users = users)
   }

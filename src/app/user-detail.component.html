@@ -14,14 +14,15 @@
 		<input [(ngModel)]="user.id" placeholder="id"/>
 	</div>
 
+	<!-- TODO: make the permissions alliing and update the user information -->
 	<div [(ngModel)]="user.permissions">
-	<label>permissions: </label>	
+	<!-- <label>permissions: </label>	
 		<input type="checkbox"  id="create" value="create"> Create<br>
 		<input type="checkbox" id="read" value="read"> Read<br>
 		<input type="checkbox"  value="update"> Update<br>
 		<input type="checkbox"  value="delete"> delete<br>
 		<input type="checkbox"  value="publish"> publish<br>
 		<input  type="checkbox"  value="archive"> Archive<br>
-	</div>
+	</div> -->
 </div>
 <button (click)="save()">Save</button>
