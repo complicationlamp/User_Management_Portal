@@ -9,15 +9,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var user_service_1 = require("./user.service");
 var UsersComponent = (function () {
-    function UsersComponent(userService) {
+    function UsersComponent(router, userService) {
+        this.router = router;
         this.userService = userService;
-        this.title = "User Management Portal";
     }
     UsersComponent.prototype.getUsers = function () {
         var _this = this;
         this.userService.getUsers().then(function (users) { return _this.users = users; });
+    };
+    UsersComponent.prototype.add = function (name) {
+        var _this = this;
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        this.userService.create(name)
+            .then(function (user) {
+            _this.users.push(user);
+            _this.selectedUser = null;
+        });
+    };
+    UsersComponent.prototype.delete = function (user) {
+        var _this = this;
+        this.userService
+            .delete(user.id)
+            .then(function () {
+            _this.users = _this.users.filter(function (x) { return x !== user; });
+            if (_this.selectedUser === user) {
+                _this.selectedUser = null;
+            }
+        });
     };
     UsersComponent.prototype.ngOnInit = function () {
         this.getUsers();
@@ -25,16 +49,19 @@ var UsersComponent = (function () {
     UsersComponent.prototype.onSelect = function (user) {
         this.selectedUser = user;
     };
+    UsersComponent.prototype.gotoDetail = function () {
+        this.router.navigate(['/detail', this.selectedUser.id]);
+    };
     return UsersComponent;
 }());
 UsersComponent = __decorate([
     core_1.Component({
         selector: 'my-users',
-        template: "\n  <h2> User Details</h2>\n  <table style=\"width:100%\" class=\"users\">\n    <tr>\n      <th>User</th>\n      <th>User id</th> \n      <th>XXXXX</th>\n    </tr>\n    <tr *ngFor=\"let user of users\" \n    [class.selected]=\"user === selectedUser\"\n    (click)=\"onSelect(user)\">\n      <td>{{user.name}}\n      <td >{{user.id}}</td> \n      <td>yyy</td>\n    </tr>\n  </table>\n  <user-detail [user]=\"selectedUser\"></user-detail>\n  ",
-        styles: ["\n    .selected {\n      background-color: #CFD8DC !important;\n      color: purple;\n    }\n    .userss {\n      margin: 0 0 2em 0;\n      list-style-type: none;\n      padding: 0;\n      width: 15em;\n    }\n    .users td {\n      cursor: pointer;\n      position: relative;\n      left: 0;\n      background-color: #EEE;\n      margin: .5em;\n      padding: .3em 0;\n      height: 1.6em;\n      border-radius: 4px;\n    }\n    .users td.selected:hover {\n      background-color: #BBD8DC !important;\n      color: white;\n    }\n    .users td:hover {\n      color: #607D8B;\n      background-color: #DDD;\n      left: .1em;\n    }\n    .users .text {\n      position: relative;\n      top: -3px;\n    }\n  "],
-        providers: [user_service_1.UserService]
+        templateUrl: './users.component.html',
+        styleUrls: ['./users.component.css']
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [router_1.Router,
+        user_service_1.UserService])
 ], UsersComponent);
 exports.UsersComponent = UsersComponent;
 //# sourceMappingURL=users.component.js.map

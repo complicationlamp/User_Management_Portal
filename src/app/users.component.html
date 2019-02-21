@@ -1,0 +1,33 @@
+<div *ngIf="selectedUser">
+		<h2>
+			View {{selectedUser.name}}'s details
+			<button (click)="gotoDetail()">here</button>
+	</h2>
+</div>
+<div>
+	<label>Add a new user:</label> <input #userName placeholder="Enter name"/>
+	<button (click)="add(userName.value); userName.value=''">
+		Add
+	</button>
+</div>
+<table style="width:100%" class="users">
+	<tr>
+		<th>User</th>
+		<th>User id</th> 
+		<th>eamil</th>
+		<th>Delete</th>
+	</tr>
+	<tr *ngFor="let user of users" 
+	[class.selected]="user === selectedUser"
+	(click)="onSelect(user)">
+		<td>{{user.name}}</td>
+		<td >{{user.id}}</td> 
+		<td>{{user.email}}</td>
+	<th>	
+			<button class="delete"
+			(click)="delete(user); $event.stopPropagation()">x</button>
+		</th>
+	</tr>
+</table>
+
+

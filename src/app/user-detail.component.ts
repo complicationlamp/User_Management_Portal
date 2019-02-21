@@ -9,7 +9,8 @@ import { UserService } from './user.service';
 
 @Component({
   selector: 'user-detail',
-  templateUrl: './user-detail.component.html',
+	templateUrl: './user-detail.component.html',
+	styleUrls: [ './user-detail.component.css' ]
 })
 export class UserDetailComponent implements OnInit {
 	user: User;
@@ -24,9 +25,14 @@ export class UserDetailComponent implements OnInit {
 		this.route.params
 		  .switchMap((params: Params) => this.userService.getUser(+params['id']))
 		  .subscribe(user => this.user = user);
-	  }
+		}
+		
+		save(): void {
+			this.userService.update(this.user)
+				.then(() => this.goBack());
+		}
 
 	  goBack(): void {
-		this.location.back();
-	  }
+			this.location.back();
+		}	
 }

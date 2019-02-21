@@ -25,6 +25,11 @@ var UserDetailComponent = (function () {
             .switchMap(function (params) { return _this.userService.getUser(+params['id']); })
             .subscribe(function (user) { return _this.user = user; });
     };
+    UserDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.userService.update(this.user)
+            .then(function () { return _this.goBack(); });
+    };
     UserDetailComponent.prototype.goBack = function () {
         this.location.back();
     };
@@ -34,6 +39,7 @@ UserDetailComponent = __decorate([
     core_1.Component({
         selector: 'user-detail',
         templateUrl: './user-detail.component.html',
+        styleUrls: ['./user-detail.component.css']
     }),
     __metadata("design:paramtypes", [user_service_1.UserService,
         router_1.ActivatedRoute,
